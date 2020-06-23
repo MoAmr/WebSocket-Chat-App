@@ -9,15 +9,18 @@ import javax.annotation.PostConstruct;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.readlearncode.dukechat.utils.Messages.WELCOME_MESSAGE;
+import static com.readlearncode.dukechat.utils.Messages.objectify;
+
 /**
- * @author Alex Theedom www.readlearncode.com
- * @version 1.0
+ * @author Mohammed Amr
  */
 @ServerEndpoint(value = "/chat/{roomName}/{userName}", encoders = MessageEncoder.class, decoders = MessageDecoder.class)
 public class ChatServerEndpoint {
@@ -34,8 +37,16 @@ public class ChatServerEndpoint {
     @OnOpen
     public void onOpen(final Session session,
                        @PathParam("roomName") final String roomName,
-                       @PathParam("userName") final String userName )  {
-        // Implement open session logic
+                       @PathParam("userName") final String userName ) throws IOException, EncodeException {
+
+        session.setMaxIdleTimeout(5 * 60 * 1000);
+        session.getUserProperties().putIfAbsent("roomName", roomName);
+        session.getUserProperties().putIfAbsent("userName", userName);
+        Room room = rooms.get(roomName);
+        room.join(session);
+        // The objectify method is a utility method that turns the text object into a message object.
+        session.getBasicRemote().sendObject(objectify(WELCOME_MESSAGE));
+
     }
 
     @OnMessage

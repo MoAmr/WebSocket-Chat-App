@@ -7,8 +7,7 @@ import java.time.LocalTime;
 import static java.lang.String.format;
 
 /**
- * @author Alex Theedom www.readlearncode.com
- * @version 1.0
+ * @author Mohammed Amr
  */
 public class Messages {
 
