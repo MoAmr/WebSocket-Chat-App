@@ -1,30 +1,18 @@
 package com.readlearncode.dukechat.domain;
 
-import java.time.LocalTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
- * @author Alex Theedom www.readlearncode.com
- * @version 1.0
+ * @author Mohammed Amr
+ * @created 24/06/2020 - 00:45
+ * @project dukechat
  */
 public class Message {
 
     private String content;
     private String sender;
-    private String received;
-
-    public Message() {
-    }
-
-    public Message(String content, String sender) {
-        this(content, sender, LocalTime.now().toString());
-    }
-
-    public Message(String content, String sender, String received) {
-        this.content = content;
-        this.sender = sender;
-        this.received = received;
-    }
+    private Date received;
 
     public String getContent() {
         return content;
@@ -42,11 +30,11 @@ public class Message {
         this.sender = sender;
     }
 
-    public String getReceived() {
+    public Date getReceived() {
         return received;
     }
 
-    public void setReceived(String received) {
+    public void setReceived(Date received) {
         this.received = received;
     }
 
