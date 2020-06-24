@@ -12,9 +12,10 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <primefaces.version>6.0</primefaces.version>
         <ui-lightness.version>1.0.10</ui-lightness.version>
+        <javax.websocket-api.version>1.1</javax.websocket-api.version>
+        <tyrus.version>1.1</tyrus.version>
         <java.version>1.8</java.version>
         <javaee-api.version>7.0</javaee-api.version>
-        <tyrus.version>1.1</tyrus.version>
         <tyrus-server.version>1.13.1</tyrus-server.version>
     </properties>
 
@@ -37,7 +38,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Standalone client/server -->
+        <!-- Standalone clientapiexample/server -->
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-server</artifactId>
@@ -118,14 +119,6 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.arquillian.container</groupId>
-                    <artifactId>arquillian-glassfish-remote-3.1</artifactId>
-                    <version>1.0.0.CR4</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -149,6 +142,13 @@
                                     </properties>
                                 </deployable>
                             </deployables>
+
+                            <configuration>
+                                <properties>
+                                    <cargo.servlet.users>username:password:user-role</cargo.servlet.users>
+                                </properties>
+                            </configuration>
+
                         </configuration>
                     </plugin>
                 </plugins>
@@ -156,5 +156,6 @@
         </profile>
 
     </profiles>
+
 
 </project>
